@@ -2,10 +2,12 @@
 
 ## Team members
 The members of the team are:
-- *Enter member 1*
-- *Enter member 2*
-- *Enter member 3*
-- *Enter member 4*
+- Shehzmani Shams
+- Begum Surma
+- Duan Zeren
+- Malaz Osman
+- Suhil Sayed
+- Quan Zhou
 *Add any further information about the team here, such as absent team members.*
 
 ## Project structure
