@@ -18,4 +18,5 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('sign up/', view.sign_up, name = 'sign_up')
 ]
