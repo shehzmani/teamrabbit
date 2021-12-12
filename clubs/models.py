@@ -17,3 +17,5 @@ class User(AbstractUser):
     last_name = models.CharField(label='last name',max_length=50)
     username = models.CharField(label ='username',max_length=50)
     email = models.EmailField(label='Email')
+    public_bio = models.CharField(label='Public bio')
+    chess_experience_level = models.CharField(label = 'Chess Experience Level') 
