@@ -4,7 +4,7 @@ from.models import User
 class SignUpForm(forms.ModelForm):
      class Meta:
         model = User
-        fields = ['first name', 'last name', 'username','Email']
+        fields = ['first name', 'last name', 'username','Email'，'public bio','chess experience level']
     
      new_password = forms.CharField(label='password',widget=forms.PasswordInput())
      password_confirmation =forms.CharField(label='password confirmation',widget=forms.PasswordInput())
