@@ -18,9 +18,6 @@ from django.urls import path
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-<<<<<<< HEAD:clubs/urls.py
+    path('', views.home, name='home'),
     path('sign_up/', views.sign_up, name='sign_up'),
-=======
-    path('sign up/', view.sign_up, name = 'sign_up')
->>>>>>> 41c8940ae6e6e5b067c0bcbab3e6aefc13acdad3:system/urls.py
 ]
