@@ -90,6 +90,10 @@ class TestUserModelCase(TestCase):
         self.user.first_name = b*51
         self._assert_user_is_invalid()
 
+    def test_first_name_must_only_have_letters(self):
+        self.user.first_name = 'Jane2'
+        self._assert_user_is_invalid()
+
     #Test last name
     def test_last_name_cannot_be_blank(self):
         self.user.last_name = ''
@@ -112,6 +116,10 @@ class TestUserModelCase(TestCase):
 
     def test_last_name_cannot_be_51_chars_long(self):
         self.user.last_name = 'b'*51
+        self._assert_user_is_invalid()
+
+    def test_last_name_must_only_have_letters(self):
+        self.user.last_name = 'D0e'
         self._assert_user_is_invalid()
 
     #Test email

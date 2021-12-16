@@ -19,9 +19,5 @@ from django.urls import path
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
-<<<<<<< HEAD
     path('sign_up/', views.sign_up, name='sign_up'),
-=======
-    path('sign up/', view.sign_up, name = 'sign_up')
->>>>>>> 4726a401120f096739d9d1613cbc813cfa352b02
 ]
