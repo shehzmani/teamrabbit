@@ -2,9 +2,8 @@ from django.shortcuts import render
 from clubs.forms import SignUpForms
 from.forms import SignUpForm
 # Create your views here.
-
 def home(request):
-    return render(request, 'home.html')
+   return render(request, 'home.html')
 
 def sign_up(request):
     form = SignUpForm()

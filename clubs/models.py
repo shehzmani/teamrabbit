@@ -6,16 +6,16 @@ from django.core.validators import RegexValidator
 # Create your models here.
 class User(AbstractUser):
     username = models.CharField(
-    max_length = 25,
-    unique = True,
-    validators=[RegexValidator(
-        regex=r'^@\w{3,}$',
-        message='username must consist of @ followed by at least 3 alphanumericals'
-    )]
-)
-    first_name = models.CharField(blank=False, max_length=50)
-    last_name = models.CharField(blank=False, max_length=50)
-    email=models.EmailField(blank=False, unique=True)
-    bio = models.CharField(blank= True, max_length=520)
-
-    personal_statement = models.CharField(blank = False, max_length=520)
+        max_length=30,
+        unique= True,
+        validators=[RegexValidator(
+            regex=r'^@\w{3,}$',
+            message='username must consist of @ followed by at least 3 alphanumericals'
+        )]
+    )
+    first_name = models.CharField(label='First name',max_length=50)
+    last_name = models.CharField(label='last name',max_length=50)
+    username = models.CharField(label ='username',max_length=50)
+    email = models.EmailField(label='Email')
+    public_bio = models.CharField(label='Public bio')
+    chess_experience_level = models.CharField(label = 'Chess Experience Level')
