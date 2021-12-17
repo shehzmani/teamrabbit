@@ -45,10 +45,6 @@ class User(AbstractUser):
         return gravatar_url
 
 class Club(models.Model):
-    owner = models.ForeignKey(
-        'User',
-        on_delete=models.CASCADE,
-    )
     name = models.CharField(blank=True, max_length=60, unique=True)
     location = models.CharField(blank=True, max_length=60, unique=False)
     descrption = models.CharField(blank=True, max_length=250, unique=False)
@@ -56,3 +52,10 @@ class Club(models.Model):
 
     class Meta:
         ordering = ['-time_created']
+
+class Member(models.Model):
+    """Model that represents members of the chess club and their significant roles in the clubs"""
+    club = models.ForeignKey(Club, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    isOwner = BooleanField(default=True)
+    isOfficer= BooleanField(default=False)

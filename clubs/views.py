@@ -1,6 +1,11 @@
 from django.shortcuts import render
+from clubs import forms
+from clubs.models import Club
 from clubs.forms import SignUpForms
 from.forms import SignUpForm
+from .forms import LoginForm
+from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 # Create your views here.
 def home(request):
@@ -12,18 +17,18 @@ def sign_up(request):
 
 def create_club(request):
     if request.method == 'POST':
-        form = CreateClubForm(request.POST)
         if request.user.is_authenticated:
+            current_user = request.username
+            form = forms.CreateClubForm(request.POST)
             if form.is_valid():
-                Post.objects.create(
-                owner = request.User,
-                name = form.cleaned_data['name']
-                location = form.cleaned_data['location']
-                description = form.cleaned_data['description']
-                )
-            return redirect('home')
+                name = form.cleaned_data.get('name'),
+                locations = form.cleaned_data.get('location'),
+                description = form.cleaned_data.get('description'),
+                post = Club.objects.create(name=name, location=location, description=description)
+                return redirect('create_club')
+            else:
+                return render(request, 'create_club.html', {'form': form})
         else:
-            messages.error(request, "User has to login in order to create a club")
+            return redirect('login')
     else:
-        form = forms.CreateClubForm()
-    return render(request, 'create_club.html', {'form': form})
+        return HttpResponseForbidden()

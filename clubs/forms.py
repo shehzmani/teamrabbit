@@ -15,4 +15,10 @@ class CreateClubForm(forms.Form):
     description=forms.CharField(label="Description", widget=forms.Textarea())
 
     #Will create the form using the data given by the form
-    def save(self)
+    def save(self):
+        super().save(commit=False)
+        club = Club.objects.create(
+            name = self.cleaned_data.get('name'),
+            location = self.cleaned_data.get('location'),
+            description = self.cleaned_data.get('description'),
+        )

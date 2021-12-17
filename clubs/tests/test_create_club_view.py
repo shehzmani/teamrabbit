@@ -15,16 +15,37 @@ class TestCreateClubView(TestCase):
         'username': '@janedoe',
         'email': "janedoe@example.org",
         'new_password': 'Password123',
-        'password_confirmation': 'Password123'
+        'password_confirmation': 'Password123',
         }
+        self.data = {
+        'name': 'The Chess Club',
+        'location': 'Kings College London',
+        'description': 'A chess club present in Kings College London'
 
-    def test_get_create_club_function(self):
-        response = self.client.get(self.url)
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'create_club.html')
-        form = response.context['form']
-        self.assertTrue(isinstance(form, CreateClubForm))
-        self.assertFalse(form.is_bound)
+    def test_not_able_to_create_clubs(self):
+        self.client.login(username=self.user.username, password="Password123")
+        user_count_before = Club.objects.count()
+        response = self.client.get(self.url, follow=True)
+        user_count_after= Club.objects.count()
+        self.assertEqual(user_count_after, user_count_before)
+        self.assertEqual(response.status_code, 403)
         
     def test_create_club_url(self):
         self.assertEqual(self.url, '/create_club/')
+
+    def test_make_sure_user_logged_in_to_create(self):
+        user_count_before = Club.objects.count()
+        redirect_url = reverse('log in')
+        response = self.client.post(self.url, self.data, follow=True)
+        self.assertRedirects(response, redirect_url, status_code=302, target_status_code=200, fetch_redirect_response=True)
+        user_count_after= Club.objects.count()
+        self.assertEqual(user_count_after, user_count_before)
+
+    def test_creating_club_is_unsuccessful(self):
+        self.client.login(username'@johndoe', password='Password123')
+        user_count_before = Club.objects.count()
+        self.data['name'] = ""
+        response = self.client.post(self.url, self.data, follow=True)
+        user_count_after = Club.objects.count()
+        self.assertEqual(user_count_after, user_count_before)
+        self.assertTemplateUsed(response, 'create_club.html')
