@@ -43,3 +43,16 @@ class User(AbstractUser):
         gravatar_object = Gravatar(self.email)
         gravatar_url = gravatar_object.get_image(size=size, default='mp')
         return gravatar_url
+
+class Club(models.Model):
+    owner = models.ForeignKey(
+        'User',
+        on_delete=models.CASCADE,
+    )
+    name = models.CharField(blank=True, max_length=60, unique=True)
+    location = models.CharField(blank=True, max_length=60, unique=False)
+    descrption = models.CharField(blank=True, max_length=250, unique=False)
+    time_created = models.DateTimeField(auto_now_add=True, blank=False)
+
+    class Meta:
+        ordering = ['-time_created']

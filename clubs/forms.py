@@ -7,3 +7,12 @@ class SignUpForm(forms.ModelForm):
         fields = ['first name', 'last name', 'username','email', 'bio', 'personal statement']
         new_password = forms.CharField(label='password',widget=forms.PasswordInput())
         password_confirmation =forms.CharField(label='password confirmation',widget=forms.PasswordInput())
+
+#Create form that will allow the user to enter data to create a new club
+class CreateClubForm(forms.Form):
+    name = forms.CharField(label="Name")
+    location = forms.CharField(label="Location")
+    description=forms.CharField(label="Description", widget=forms.Textarea())
+
+    #Will create the form using the data given by the form
+    def save(self)
